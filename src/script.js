@@ -6,14 +6,26 @@ function dealCards() {
 
     allCards.forEach(element => {
         let card = document.createElement("div");
+        card.classList.add("card");
+
         card.innerHTML = 
-        "<div class='card'>" +
-        "<div class= 'card-content'>" +
+        "<div class= 'front'>" +
         element +
         "</div>" +
+        "<div class='back'>" +
         "</div>";
         table.appendChild(card);
     });
 }
 
+function show(){
+    this.classList.add("shown")
+}
+
 dealCards();
+
+document.querySelectorAll(".card").forEach(
+    function(element){
+        element.addEventListener("click", show);
+    }
+);
