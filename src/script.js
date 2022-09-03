@@ -25,7 +25,6 @@ function dealCards() {
     let table = document.querySelector("#table");
     let shuffledCards = shuffleCards();
     table.innerHTML="";
-    console.log(allCards);
 
     shuffledCards.forEach(element => {
         let card = document.createElement("div");
@@ -42,8 +41,48 @@ function dealCards() {
     });
 
     function show(){
+         let allShown = document.querySelectorAll(".shown:not(.success)");
+        if(allShown.length > 1){
+            return;
+        }
         this.classList.add("shown");
+        
+        let cardsShown = document.querySelectorAll(".shown");
+        if (cardsShown.length < 2){
+            return;
+        }
+        compare(cardsShown);
     }
+
+    function compare(cardsShown){
+        let card1 = cardsShown[0].getElementsByTagName('img')[0].src;
+        let card2 = cardsShown[1].getElementsByTagName('img')[0].src;
+
+        if(card1 === card2){
+            success(cardsShown);
+        } else {
+            error(cardsShown);
+        }
+    };
+
+    function success(cardsShown){
+        cardsShown.forEach(function(element) {
+            element.classList.add("success");
+        });    
+    };
+
+    function error(cardsShown){
+        cardsShown.forEach(function(element) {
+            element.classList.add("error");
+        });     
+
+        setTimeout(function(){          
+            cardsShown.forEach(function(element) {
+                element.classList.remove("error");
+                element.classList.remove("shown");
+            });
+        }, 1000);
+    };
 
     document.querySelectorAll(".card").forEach(
         function(element){
