@@ -6,14 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory</title>
     <link rel="stylesheet" href="src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <div class="moves-container">
+            <div class="moves">
+                <div class="tittle">MOVES</div>
+                <div class="numbers">
+                    <span id="mov">0</span>/<span id="mov-total">20</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timer-container">
+            <div class="time">
+                <div class="tittle">TIME</div>
+                <div class="numbers">
+                    <span id="minutes">00</span>:<span id="seconds">00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+   
     <main>
         <div id="table"></div>
-        <button>Deal cards</button>    
     </main>
-
+    <button>Deal cards</button>    
 
     <script src="src/script.js"></script>
+
 </body>
 </html>

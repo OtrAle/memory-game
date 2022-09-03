@@ -52,6 +52,7 @@ function dealCards() {
             return;
         }
         compare(cardsShown);
+        updateCounter()
     }
 
     function compare(cardsShown){
@@ -97,3 +98,47 @@ function dealCards() {
 }
 
 document.querySelector("button").addEventListener("click", dealCards);
+
+//Timer
+function startTimer(){
+    let seconds = 0;
+    let minutes = 1;
+    let textSeconds;
+    let textMinutes;
+ 
+    function updateTimer(){
+        seconds--;
+        if (seconds < 0){
+            seconds = 59;
+            minutes--;
+        }
+        if (minutes < 0){
+            seconds = 0;
+            minutes = 0;   
+            clearInterval(timer);
+        }
+
+        textSeconds = seconds;
+        textMinutes = minutes;
+
+        if (seconds < 10){
+            textSeconds = `0${seconds}`
+        } 
+        if (minutes < 10) {
+            textMinutes = `0${minutes}`
+        }
+
+        document.querySelector("#minutes").innerHTML= textMinutes;
+        document.querySelector("#seconds").innerHTML= textSeconds;
+    }
+    let timer = setInterval(updateTimer, 1000);
+}
+
+startTimer();
+
+//Moves counter
+let moves = 0;
+ function updateCounter() {
+    moves++;
+    document.querySelector("#mov").innerText = moves;
+}

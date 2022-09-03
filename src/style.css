@@ -11,13 +11,33 @@ body{
       #f5f7fa 74%);    
 }
 
+header {
+    font-family: 'Righteous', sans-serif;
+    padding: 0.2rem 2rem;
+    background: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    position: fixed;
+    top:0;
+    display: flex;
+}
+
+.tittle{
+    font-size:1rem;
+}
+
+
+.timer-container,
+.moves-container{
+    margin: 0.5rem 2rem;
+}
+
 main{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-
 
 button{
     margin: 3em;
