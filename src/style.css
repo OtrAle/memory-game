@@ -54,7 +54,7 @@ button:hover{
     position: relative;
     border-radius: 0.3em;
     box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.2);
-    /* transition: all 1s linear; */
+    transition: all .5s  ease-in-out;
     transform-style: preserve-3d;
 }
 
@@ -94,17 +94,33 @@ img{
     border-radius: 0.3em;
 }
 
-
 .success {
-    animation: acierto 1.3s ease-in-out forwards;
- }
+    animation: success .6s forwards;
+}
+
+
+@keyframes success {
+    0% {
+        transform:  rotateY(0)  scale(1);
+        opacity: 0.8; 
+    }
+
+    25% {
+        transform:  rotateY(0)  scale(1.05);
+        opacity: 0.5; 
+    }
+
+    100% {
+        transform:  rotateY(360) scale3d(1);
+        opacity: 0;
+    }
+  
+  }
   
 .error {
-    animation: error 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    animation: error 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
   
-
-
 @keyframes error {
     10%,
     90% {
@@ -122,22 +138,5 @@ img{
     40%,
     60% {
       transform: rotateY(-180deg) translateX(4px);
-    }
-  }
-  
-  @keyframes acierto {
-    from {
-      transform: rotateY(-180deg) scale3d(1, 1, 1);
-      opacity: 1;
-    }
-  
-    25% {
-      transform: rotateY(-180deg) scale3d(1.1, 1.1, 1.1);
-      opacity: 1;
-    }
-  
-    to {
-      transform: rotateY(-180deg) scale3d(1, 1, 1);
-      opacity: 0;
     }
   }

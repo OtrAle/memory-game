@@ -47,7 +47,7 @@ function dealCards() {
         }
         this.classList.add("shown");
         
-        let cardsShown = document.querySelectorAll(".shown");
+        let cardsShown = document.querySelectorAll(".shown:not(.success)");
         if (cardsShown.length < 2){
             return;
         }
@@ -66,22 +66,27 @@ function dealCards() {
     };
 
     function success(cardsShown){
-        cardsShown.forEach(function(element) {
-            element.classList.add("success");
-        });    
+        setTimeout(function(){          
+            cardsShown.forEach(function(element) {
+                element.classList.add("success");
+            });
+        }, 800);
+
     };
 
     function error(cardsShown){
-        cardsShown.forEach(function(element) {
-            element.classList.add("error");
-        });     
-
+       setTimeout(function(){          
+            cardsShown.forEach(function(element) {
+                element.classList.add("error");
+            });
+        }, 500);
+     
         setTimeout(function(){          
             cardsShown.forEach(function(element) {
                 element.classList.remove("error");
                 element.classList.remove("shown");
             });
-        }, 1000);
+        }, 1200);
     };
 
     document.querySelectorAll(".card").forEach(
