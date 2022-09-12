@@ -27,6 +27,9 @@ function dealCards() {
     table.innerHTML="";
 
     shuffledCards.forEach(element => {
+        let cardBack = document.createElement("img");
+        cardBack.src = "card-back.png";
+
         let card = document.createElement("div");
         card.classList.add("card");
     
@@ -36,9 +39,14 @@ function dealCards() {
         "<div class='back'>" +
         "</div>";
         table.appendChild(card);
+
+        let back = document.getElementsByClassName("back");
+        back[back.length-1].appendChild(cardBack);  
+        
         let front = document.getElementsByClassName("front");
-        front[front.length-1].appendChild(element);
+        front[front.length-1].appendChild(element);    
     });
+
 
     function show(){
          let allShown = document.querySelectorAll(".shown:not(.success)");
@@ -52,7 +60,7 @@ function dealCards() {
             return;
         }
         compare(cardsShown);
-        updateCounter()
+        updateCounter();
     }
 
     function compare(cardsShown){
@@ -95,9 +103,13 @@ function dealCards() {
             element.addEventListener("click", show);
         }
     );
+
+    let startButton = document.querySelector(".start");
+    startButton.remove();
+
 }
 
-document.querySelector("button").addEventListener("click", dealCards);
+document.querySelector(".start").addEventListener("click", dealCards);
 
 //Timer
 function startTimer(){
@@ -114,7 +126,7 @@ function startTimer(){
         }
         if (minutes < 0){
             seconds = 0;
-            minutes = 0;   
+            minutes = 0;
             clearInterval(timer);
         }
 
