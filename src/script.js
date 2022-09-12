@@ -21,7 +21,14 @@ function shuffleCards() {
     return result;
 }
 
+
+let startScreen = document.querySelector(".start-screen");
+let header = document.querySelector(".default");
+
+
 function dealCards() {
+    header.style.display = "flex";
+    let moves = 0;
     let table = document.querySelector("#table");
     let shuffledCards = shuffleCards();
     table.innerHTML="";
@@ -47,8 +54,8 @@ function dealCards() {
         front[front.length-1].appendChild(element);    
     });
 
-
     function show(){
+        let leftCards;
          let allShown = document.querySelectorAll(".shown:not(.success)");
         if(allShown.length > 1){
             return;
@@ -61,6 +68,13 @@ function dealCards() {
         }
         compare(cardsShown);
         updateCounter();
+
+        setTimeout(function() {
+            leftCards = document.querySelectorAll(".card:not(.success)");
+            if(leftCards.length===0){
+               end();
+            }
+        }, 2000);
     }
 
     function compare(cardsShown){
@@ -80,7 +94,6 @@ function dealCards() {
                 element.classList.add("success");
             });
         }, 800);
-
     };
 
     function error(cardsShown){
@@ -104,8 +117,9 @@ function dealCards() {
         }
     );
 
-    let startButton = document.querySelector(".start");
-    startButton.remove();
+    startScreen.style.display = "none";
+
+    
 
 }
 
@@ -154,3 +168,10 @@ let moves = 0;
     moves++;
     document.querySelector("#mov").innerText = moves;
 }
+
+//end game
+
+function end() {
+    header.style.display = "none";
+    startScreen.style.display = "flex";
+ }
