@@ -15,6 +15,7 @@ let table = document.querySelector("#table");
 let secondsArray = [15, 25, 25, 30, 30, 40, 40, 50, 50, 0, 0, 10, 20, 30, 40];
 let minutesArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1];
 let defaultTime = 0;
+let level = 1;
 
 //Create cards
 function createCards() {
@@ -42,10 +43,12 @@ function shuffleCards() {
 function start() {
     firstLevelCards();
     dealCards();
+    defaultTime = 0;
 }
 
 function next(){
     nextLevelcards();
+    defaultTime++;
     dealCards();
 }
 
@@ -55,6 +58,7 @@ function retry() {
 }
 
 function firstLevelCards(){
+    level = 1;
     moves = 0;
     movesTotal = 3;
     document.querySelector("#mov-total").innerText = movesTotal;
@@ -63,6 +67,7 @@ function firstLevelCards(){
 }
 
 function nextLevelcards(){
+    level++;
     moves = 0;
     movesTotal = movesTotal + 2;
     document.querySelector("#mov-total").innerText = movesTotal;
@@ -83,6 +88,8 @@ function dealCards() {
     header.style.display = "block";
     nextLevelScreen.style.display = "none";
     startScreen.style.display = "none";
+
+    document.querySelector(".level").innerHTML = level;
 
     startTimer();
     let shuffledCards = shuffleCards();
@@ -189,7 +196,6 @@ function dealCards() {
 function startTimer(){
     let minutes = minutesArray[defaultTime];
     let seconds = secondsArray[defaultTime];
-    defaultTime++;
 
     document.querySelector("#minutes").innerHTML= minutes;
     document.querySelector("#seconds").innerHTML= seconds;
@@ -200,7 +206,6 @@ function startTimer(){
     if (minutes < 10) {
         document.querySelector("#minutes").innerHTML= `0${minutes}`;
     }
-
 
     let textSeconds;
     let textMinutes;
