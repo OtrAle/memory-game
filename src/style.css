@@ -1,8 +1,6 @@
 *{
     font-family: 'Antonio', sans-serif;
 }
-
-
 body{
     min-height: 100vh;
     background-image: url("../bg.svg");
@@ -40,6 +38,16 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: fadein 1s ease-in;
+}
+
+@keyframes fadein{
+    from{
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
 
 
@@ -57,6 +65,8 @@ body{
     margin: 0;
     align-items: center;
     justify-content: center;
+    animation: fadein 1s ease-in-out;
+    
 }
 
 .message-title{
@@ -79,13 +89,10 @@ body{
     width: 15em;
     height: 15em;
     border-radius: 50%;
-
-
     background-color:rgba(255, 255, 255, 0.1);
     border: 1px inset rgba(225, 225, 225, 0.2);
     backdrop-filter: blur(10px);
 }
-
 
 .story{
     font-family: 'lato', sans-serif;
@@ -132,8 +139,7 @@ main{
     flex-direction: column;
 }
 
-.start, 
-.try-again{
+button{
     z-index: 3;
     font-weight: 700;
     letter-spacing:.5em;
@@ -146,10 +152,10 @@ main{
     font-size: 1rem;
     height: 3em;
     width: 15em;
-    transition: all ease-in-out 500ms;
+    transition: all 500ms ease-in-out;
 }
 
-.start:hover{
+button:hover{
     background-color:rgba(255, 255, 255, 0.4);
 }
 
