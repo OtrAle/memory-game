@@ -2,7 +2,7 @@ let group1 = new Array();
 let group2 = new Array();
 let timer;
 let moves = 0;
-let movesTotal = 0;
+let movesTotal = 2;
 let numCards = 2;
 let startScreen = document.querySelector(".start-screen");
 let header = document.querySelector(".default");
@@ -12,6 +12,7 @@ let nextLevelScreen = document.querySelector(".next-level-screen");
 let timeUp = document.querySelector(".time-is-up");
 let movesOver = document.querySelector(".moves-out");
 let table = document.querySelector("#table");
+let minutesArray = [];
 
 //Create cards
 function createCards() {
@@ -28,7 +29,6 @@ function createCards() {
     allCards= group1.concat(group2);
 }
 
-
 //shuffle
 function shuffleCards() {
     let result = allCards.sort(function() {
@@ -43,6 +43,7 @@ function start() {
 }
 
 function retry() {
+    debugger;
     prepareCardsRetry();
     dealCards();
 }
@@ -59,6 +60,7 @@ function prepareCardsRetry(){
     moves = 0;
     movesTotal = movesTotal;
     document.querySelector("#mov-total").innerText = movesTotal;
+    numCards = numCards;
     createCards();
 }
 
@@ -96,7 +98,6 @@ function dealCards() {
         front[front.length-1].appendChild(element);    
     });
 
-
     //Flip cards when clicking
     function show(){
          let allShown = document.querySelectorAll(".shown:not(.success)");
@@ -104,7 +105,8 @@ function dealCards() {
             return;
         }
         this.classList.add("shown");
-        
+        document.querySelector("#sound-flip").cloneNode().play();
+
         let cardsShown = document.querySelectorAll(".shown:not(.success)");
         if (cardsShown.length < 2){
             return;
@@ -115,13 +117,13 @@ function dealCards() {
         setTimeout(function() {
             leftCards = document.querySelectorAll(".card:not(.success)");
             if(leftCards.length===0 && numCards!==15){
+                document.querySelector("#sound-level-up").play();
                endLevel();
             } else if (leftCards.length===0 && numCards===15) {
                 alert("end");
             }
         }, 2000);
     }
-
 
     //compare cards when two open
     function compare(cardsShown){
@@ -135,22 +137,23 @@ function dealCards() {
         }
     };
 
-
-    //It's a match
+    //Succes
     function success(cardsShown){
         setTimeout(function(){          
             cardsShown.forEach(function(element) {
                 element.classList.add("success");
+                document.querySelector("#sound-success").cloneNode().play();
             });
+
         }, 800);
     };
 
-
-    //It's not a match
+    //Error
     function error(cardsShown){
        setTimeout(function(){          
             cardsShown.forEach(function(element) {
                 element.classList.add("error");
+                document.querySelector("#sound-error").cloneNode().play();
             });
         }, 500);
      
@@ -162,27 +165,20 @@ function dealCards() {
         }, 1200);
     };
 
-
     //
     document.querySelectorAll(".card").forEach(
         function(element){
             element.addEventListener("click", show);
         }
-    );
-
-    
+    ); 
 }
-
 
 //Timer
 function startTimer(){
     let minutes = 1;
     let seconds = 0;
-
     let textSeconds;
     let textMinutes;
-
-   
 
     function updateTimer(){
         seconds--;
@@ -215,7 +211,6 @@ function startTimer(){
            setTimeout(timeOver,1000);
         }
     }
-
     timer = setInterval(updateTimer, 1000);
 }
 
@@ -224,8 +219,11 @@ function startTimer(){
     moves++;
     document.querySelector("#mov").innerText = moves;
 
-    if (moves > movesTotal){
-        movesOut();
+    if (moves === movesTotal && leftCards.length > 0){
+        setTimeout(function() {
+            document.querySelector("#sound-level-fail").play();
+            movesOut();
+        },1500);    
     }
 }
 
@@ -245,7 +243,6 @@ function timeOver() {
     table.style.display = "none";
     header.style.display = "none";
     movesOver.style.display = "none";
-
 }
 
 //Moves out
@@ -254,7 +251,6 @@ function movesOut() {
     document.querySelector("#mov").innerText = 0;
     movesOver.style.display = "flex";
     timeUp.style.display = "none";
-
     table.style.display = "none";
     header.style.display = "none";
 }

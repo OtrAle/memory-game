@@ -258,18 +258,12 @@ img{
     }
   }
 
- 
-  .next-level-screen{
-    display: none;
-  }
-
-
-  .time-is-up{
-    display: none;
-    
-
-  }
-
+  .next-level-screen,
+  .time-is-up,
   .moves-out{
+    display: none;
+  }
+
+  .sound{
     display: none;
   }
