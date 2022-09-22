@@ -1,19 +1,35 @@
 let group1 = new Array();
 let group2 = new Array();
-const numCards = 5;
+let timer;
+let moves = 0;
+let movesTotal = 0;
+let numCards = 2;
+let startScreen = document.querySelector(".start-screen");
+let header = document.querySelector(".default");
+let allCards;
+let leftCards;
+let nextLevelScreen = document.querySelector(".next-level-screen"); 
+let timeUp = document.querySelector(".time-is-up");
+let movesOver = document.querySelector(".moves-out");
+let table = document.querySelector("#table");
 
-for (let i = 0; i < numCards; i++) {
-    group1[i] = document.createElement("img");
-    group1[i].src = `cards/img-${i+1}.png`;
+//Create cards
+function createCards() {
+    for (let i = 0; i < numCards; i++) {
+        group1[i] = document.createElement("img");
+        group1[i].src = `cards/img-${i+1}.png`;
+    }
+        
+    for (let i = 0; i < numCards; i++) {
+        group2[i] = document.createElement("img");
+        group2[i].src = `cards/img-${i+1}.png`;
+    } 
+    
+    allCards= group1.concat(group2);
 }
 
-for (let i = 0; i < numCards; i++) {
-    group2[i] = document.createElement("img");
-    group2[i].src = `cards/img-${i+1}.png`;
-}
 
-let allCards = group1.concat(group2);
-
+//shuffle
 function shuffleCards() {
     let result = allCards.sort(function() {
         return 0.5 - Math.random(); 
@@ -21,18 +37,44 @@ function shuffleCards() {
     return result;
 }
 
+function start() {
+    prepareCards();
+    dealCards();
+}
 
-let startScreen = document.querySelector(".start-screen");
-let header = document.querySelector(".default");
+function retry() {
+    prepareCardsRetry();
+    dealCards();
+}
 
+function prepareCards(){
+    moves = 0;
+    movesTotal = movesTotal + 2;
+    document.querySelector("#mov-total").innerText = movesTotal;
+    createCards();
+    numCards++;
+}
+
+function prepareCardsRetry(){
+    moves = 0;
+    movesTotal = movesTotal;
+    document.querySelector("#mov-total").innerText = movesTotal;
+    createCards();
+}
 
 function dealCards() {
-    header.style.display = "flex";
-    let moves = 0;
-    let table = document.querySelector("#table");
+    table.style.display = "flex";
+    timeUp.style.display = "none";
+    movesOver.style.display = "none";
+    header.style.display = "block";
+    nextLevelScreen.style.display = "none";
+    startScreen.style.display = "none";
+
+    startTimer();
     let shuffledCards = shuffleCards();
     table.innerHTML="";
 
+    //Dealing cards to table
     shuffledCards.forEach(element => {
         let cardBack = document.createElement("img");
         cardBack.src = "card-back.png";
@@ -54,8 +96,9 @@ function dealCards() {
         front[front.length-1].appendChild(element);    
     });
 
+
+    //Flip cards when clicking
     function show(){
-        let leftCards;
          let allShown = document.querySelectorAll(".shown:not(.success)");
         if(allShown.length > 1){
             return;
@@ -71,12 +114,16 @@ function dealCards() {
 
         setTimeout(function() {
             leftCards = document.querySelectorAll(".card:not(.success)");
-            if(leftCards.length===0){
-               end();
+            if(leftCards.length===0 && numCards!==15){
+               endLevel();
+            } else if (leftCards.length===0 && numCards===15) {
+                alert("end");
             }
         }, 2000);
     }
 
+
+    //compare cards when two open
     function compare(cardsShown){
         let card1 = cardsShown[0].getElementsByTagName('img')[0].src;
         let card2 = cardsShown[1].getElementsByTagName('img')[0].src;
@@ -88,6 +135,8 @@ function dealCards() {
         }
     };
 
+
+    //It's a match
     function success(cardsShown){
         setTimeout(function(){          
             cardsShown.forEach(function(element) {
@@ -96,6 +145,8 @@ function dealCards() {
         }, 800);
     };
 
+
+    //It's not a match
     function error(cardsShown){
        setTimeout(function(){          
             cardsShown.forEach(function(element) {
@@ -111,27 +162,28 @@ function dealCards() {
         }, 1200);
     };
 
+
+    //
     document.querySelectorAll(".card").forEach(
         function(element){
             element.addEventListener("click", show);
         }
     );
 
-    startScreen.style.display = "none";
-
     
-
 }
 
-document.querySelector(".start").addEventListener("click", dealCards);
 
 //Timer
 function startTimer(){
-    let seconds = 0;
     let minutes = 1;
+    let seconds = 0;
+
     let textSeconds;
     let textMinutes;
- 
+
+   
+
     function updateTimer(){
         seconds--;
         if (seconds < 0){
@@ -144,6 +196,8 @@ function startTimer(){
             clearInterval(timer);
         }
 
+        let totalTime = minutes + seconds;
+     
         textSeconds = seconds;
         textMinutes = minutes;
 
@@ -156,22 +210,60 @@ function startTimer(){
 
         document.querySelector("#minutes").innerHTML= textMinutes;
         document.querySelector("#seconds").innerHTML= textSeconds;
+
+        if (totalTime === 0 ) {
+           setTimeout(timeOver,1000);
+        }
     }
-    let timer = setInterval(updateTimer, 1000);
+
+    timer = setInterval(updateTimer, 1000);
 }
 
-startTimer();
-
 //Moves counter
-let moves = 0;
  function updateCounter() {
     moves++;
     document.querySelector("#mov").innerText = moves;
+
+    if (moves > movesTotal){
+        movesOut();
+    }
 }
 
 //end game
-
-function end() {
+function endLevel() {
+    clearInterval(timer);
+    document.querySelector("#mov").innerText = 0;
+    nextLevelScreen.style.display = "flex";
     header.style.display = "none";
-    startScreen.style.display = "flex";
- }
+}
+
+//Time is up
+function timeOver() {
+    clearInterval(timer);
+    document.querySelector("#mov").innerText = 0;
+    timeUp.style.display = "flex";
+    table.style.display = "none";
+    header.style.display = "none";
+    movesOver.style.display = "none";
+
+}
+
+//Moves out
+function movesOut() {
+    clearInterval(timer);
+    document.querySelector("#mov").innerText = 0;
+    movesOver.style.display = "flex";
+    timeUp.style.display = "none";
+
+    table.style.display = "none";
+    header.style.display = "none";
+}
+
+//Start Game
+document.querySelectorAll(".start").forEach(element => {
+    element.addEventListener("click", start)
+});
+
+document.querySelectorAll(".try-again").forEach(element => {
+    element.addEventListener("click", retry)
+});
