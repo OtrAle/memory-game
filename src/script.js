@@ -12,8 +12,8 @@ let nextLevelScreen = document.querySelector(".next-level-screen");
 let timeUp = document.querySelector(".time-is-up");
 let movesOver = document.querySelector(".moves-out");
 let table = document.querySelector("#table");
-let secondsArray = [15, 25, 25, 30, 30, 40, 40, 50, 50, 0, 0, 10, 20, 30, 40];
-let minutesArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1];
+let secondsArray = [15, 25, 25, 30, 30, 50, 50, 10, 10, 20, 20, 30, 40, 50, 0];
+let minutesArray = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2];
 let defaultTime = 0;
 let level = 1;
 
@@ -69,7 +69,7 @@ function firstLevelCards(){
 function nextLevelcards(){
     level++;
     moves = 0;
-    movesTotal = movesTotal + 2;
+    movesTotal = movesTotal + 3;
     document.querySelector("#mov-total").innerText = movesTotal;
     numCards++;
     createCards();
@@ -90,7 +90,7 @@ function dealCards() {
     startScreen.style.display = "none";
 
     document.querySelector(".level").innerHTML = level;
-
+    clearInterval(timer);
     startTimer();
     let shuffledCards = shuffleCards();
     table.innerHTML="";
@@ -237,13 +237,17 @@ function startTimer(){
         document.querySelector("#minutes").innerHTML= textMinutes;
         document.querySelector("#seconds").innerHTML= textSeconds;
 
-        if (totalTime === 0 ) {
-            setTimeout(function() {
-                document.querySelector("#sound-level-fail").play();
-                timeOver();
-            },1000)
-        }
+        setTimeout(function() {
+            if (totalTime === 0 && document.querySelectorAll(".card:not(.success)").length !== 0) {
+                setTimeout(function() {
+                    document.querySelector("#sound-level-fail").play();
+                    timeOver();
+                },1000)
+            }   
+        }, 50);
     }
+
+
     timer = setInterval(updateTimer, 1000);
 }
 
