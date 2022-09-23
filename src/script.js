@@ -77,6 +77,7 @@ function nextLevelcards(){
 
 function retryLevelCards(){
     moves = 0;
+    document.querySelector("#mov").innerText = 0;
     document.querySelector("#mov-total").innerText = movesTotal;
     createCards();
 }
@@ -89,7 +90,7 @@ function dealCards() {
     nextLevelScreen.style.display = "none";
     startScreen.style.display = "none";
 
-    document.querySelector(".level").innerHTML = level;
+    document.querySelector("#level").innerHTML = level;
     clearInterval(timer);
     startTimer();
     let shuffledCards = shuffleCards();
@@ -296,8 +297,6 @@ function movesOut() {
 //Start Game
 document.querySelector(".start").addEventListener("click", start);
 document.querySelector(".next-level-button").addEventListener("click", next);
-
-
 
 document.querySelectorAll(".try-again").forEach(element => {
     element.addEventListener("click", retry)

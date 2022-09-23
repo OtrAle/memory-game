@@ -5,30 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory</title>
+    <script src="https://kit.fontawesome.com/fa4c6fd86d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="src/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="default">
         <div class="moves-container">
-            <div class="moves">
-                <div class="tittle">MOVES</div>
-                <div class="numbers">
-                    <span id="mov">0</span>/<span id="mov-total">20</span>
-                </div>
+            <div class="title">MOVES</div>
+            <div class="numbers">
+                <span id="mov">0</span>/<span id="mov-total">20</span>
             </div>
         </div>
 
         <div class="timer-container">
-            <div class="time">
-                <div class="tittle">TIME</div>
-                <div class="numbers">
-                    <span id="minutes">00</span>:<span id="seconds">00</span>
-                </div>
+            <div class="title">TIME</div>
+            <div class="numbers">
+                <span id="minutes">00</span>:<span id="seconds">00</span>
             </div>
         </div>
+
+        <div class="level-container">
+            <div class="title">LEVEL</div>
+            <div class="numbers">
+                    <span id="level">1</span><i class="try-again fa-solid fa-rotate-right"></i>
+            </div>
+        </div>   
     </header>
    
     <main>
@@ -46,7 +50,6 @@
             a bull with a fox tail, a beetle with an elephant head, <br>
             and all of them were shouting one word: <br>
             ALEBRIJES! ALEBRIJES!
-
         </div> -->
 
         <button class="start">DEAL CARDS</button>    
@@ -56,37 +59,34 @@
         <div class="leaves"></div>
         <div class="message-box">
             <div>
-                <span class="message-title-next" > Oh yeah! </span><br>
+                <span class="message-title-next"> Oh yeah! </span><br>
                 Congratulations! you rock!
-             </div>
-             <button class="next-level-button">NEXT LEVEL</button>    
             </div>
+            <button class="next-level-button">NEXT LEVEL</button>
+            <div class="try-again retry">Replay level!</div>
+        </div>
     </div>
 
     <div class="time-is-up">
         <div class="leaves"></div>
         <div class="message-box">
-        <div>
-            <span class="message-title" > Oh no! </span><br>
-            Time is up!
-         </div>
-         <button class="try-again">TRY AGAIN</button>    
+            <div>
+                <span class="message-title" > Oh no! </span><br>
+                Time is up!
+            </div>
+            <button class="try-again">TRY AGAIN</button>
         </div>
     </div>
 
     <div class="moves-out">
         <div class="leaves"></div>
         <div class="message-box">
-         <div>
-            <span class="message-title" > Whoops! </span><br> 
-            You're out of moves!
-         </div>
-         <button class="try-again">TRY AGAIN</button>    
+            <div>
+                <span class="message-title" > Whoops! </span><br> 
+                You're out of moves!
+            </div>
+            <button class="try-again">TRY AGAIN</button> 
         </div>
-    </div>
-
-    <div>
-        level <span class="level">1</span>
     </div>
 
     <audio
@@ -103,7 +103,6 @@
     preload="auto"
     ></audio>
 
-
     <audio
     src="sound/success.wav"
     class="sound"
@@ -118,7 +117,6 @@
     preload="auto"
     ></audio>
 
-
     <audio
     src="sound/levelfail.wav"
     class="sound"
@@ -126,7 +124,6 @@
     preload="auto"
     ></audio>
 
-
-    <script src="src/script.js"></script>
+<script src="src/script.js"></script>
 </body>
 </html>
