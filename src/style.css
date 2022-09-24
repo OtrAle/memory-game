@@ -15,6 +15,21 @@ body{
     align-items: center;
 }
 
+.start-card{
+    background-image: 
+    repeating-linear-gradient(36deg,
+    rgba(255,255,255, 0.05),
+    rgba(255,255,255, 0.05) 1px,
+    transparent 0px, transparent 2px);
+    z-index: 1;
+    background-color:rgba(255, 255, 255, 0.1);
+    border: 1px inset rgba(225, 225, 225, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 4em 2em;
+    border-radius: 1em 4em;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.2);
+ 
+}
 .leaves{
     width: 100vw;
     height: 100vh;
@@ -23,6 +38,36 @@ body{
     top: 0;
     background-repeat: no-repeat;
     background-size:cover;
+}
+
+.game-title{
+    text-align: center;
+   
+
+
+}
+
+.game-title-two{
+    font-size: 3em;
+    color: #f70b66;
+    font-weight: 700;
+    text-shadow: 3px 3px 2px #27000f;
+    line-height: 1em;
+}
+.game-title-one{
+    color: #E6AF1C;
+    text-shadow: 3px 3px 2px #251b00; 
+}
+
+
+.game-title-three{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: .5em;
+    letter-spacing: .5em;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .start-screen{
@@ -154,6 +199,7 @@ button{
     height: 3em;
     width: 15em;
     transition: all 500ms ease-in-out;
+    backdrop-filter: blur(5px);
 }
 
 button:hover{

@@ -1,3 +1,19 @@
+var imagesBg = new Array()
+	function preload() {
+		for (i = 0; i < preload.arguments.length; i++) {
+			imagesBg[i] = new Image()
+			imagesBg[i].src = preload.arguments[i]
+		}
+}
+
+
+preload(
+	"card-back.png",
+    "bg.svg",
+    "leaves-01.svg"
+);
+
+
 let group1 = new Array();
 let group2 = new Array();
 let timer;
@@ -114,7 +130,7 @@ function dealCards() {
         back[back.length-1].appendChild(cardBack);  
         
         let front = document.getElementsByClassName("front");
-        front[front.length-1].appendChild(element);    
+        front[front.length-1].appendChild(element);  
     });
 
     //Flip cards when clicking
@@ -311,3 +327,5 @@ document.querySelectorAll(".try-again").forEach(element => {
 document.querySelectorAll(".go-start").forEach(element => {
     element.addEventListener("click", goToStartScreen)
 });
+
+
