@@ -3,7 +3,6 @@ let group2 = new Array();
 let timer;
 let moves = 0;
 let movesTotal = 3;
-let numCards = 2;
 let startScreen = document.querySelector(".start-screen");
 let header = document.querySelector(".default");
 let allCards;
@@ -16,6 +15,7 @@ let secondsArray = [15, 25, 25, 30, 30, 50, 50, 10, 10, 20, 20, 30, 40, 50, 0];
 let minutesArray = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2];
 let defaultTime = 0;
 let level = 1;
+let numCards;
 
 //Create cards
 function createCards() {
@@ -28,7 +28,6 @@ function createCards() {
         group2[i] = document.createElement("img");
         group2[i].src = `cards/img-${i+1}.png`;
     } 
-    
     allCards= group1.concat(group2);
 }
 
@@ -247,8 +246,6 @@ function startTimer(){
             }   
         }, 50);
     }
-
-
     timer = setInterval(updateTimer, 1000);
 }
 
@@ -264,6 +261,15 @@ function startTimer(){
             movesOut();
         },1500);    
     }
+}
+//Go to Start screen
+function goToStartScreen() { 
+    table.style.display = "none";
+    timeUp.style.display = "none";
+    movesOver.style.display = "none";
+    header.style.display = "none";
+    nextLevelScreen.style.display = "none";
+    startScreen.style.display = "flex";
 }
 
 //end game
@@ -300,4 +306,8 @@ document.querySelector(".next-level-button").addEventListener("click", next);
 
 document.querySelectorAll(".try-again").forEach(element => {
     element.addEventListener("click", retry)
+});
+
+document.querySelectorAll(".go-start").forEach(element => {
+    element.addEventListener("click", goToStartScreen)
 });
