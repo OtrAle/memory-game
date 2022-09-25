@@ -16,6 +16,10 @@ body{
 }
 
 .start-card{
+    /* background-image: url("../leaves-01.svg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size:cover; */
     z-index: 1;
     background-color:rgba(255, 255, 255, 0.1);
     border: 1px inset rgba(225, 225, 225, 0.2);

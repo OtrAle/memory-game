@@ -5,6 +5,7 @@ var imagesBg = new Array()
 			imagesBg[i].src = preload.arguments[i]
 		}
 }
+
 preload(
 	"card-back.png",
     "bg.svg",
@@ -47,8 +48,8 @@ function tiltEffect(event) {
     const centerY = startCard.offsetTop + cardHeight/2;
     const mouseX = event.clientX - centerX;
     const mouseY = event.clientY - centerY;
-    const rotateX = 15 * mouseY/(cardHeight/2);
-    const rotateY = -15 * mouseX/(cardWidth/2);
+    const rotateX = 20 * mouseY/(cardHeight/2);
+    const rotateY = -20 * mouseX/(cardWidth/2);
     startCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 }
 
@@ -67,6 +68,9 @@ function setTransition() {
 
 //Create cards
 function createCards() {
+    group1.length = 0;
+    group2.length = 0;
+
     for (let i = 0; i < numCards; i++) {
         group1[i] = document.createElement("img");
         group1[i].src = `cards/img-${i+1}.png`;
