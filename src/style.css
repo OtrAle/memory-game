@@ -16,19 +16,15 @@ body{
 }
 
 .start-card{
-    background-image: 
-    repeating-linear-gradient(36deg,
-    rgba(255,255,255, 0.05),
-    rgba(255,255,255, 0.05) 1px,
-    transparent 0px, transparent 2px);
     z-index: 1;
     background-color:rgba(255, 255, 255, 0.1);
     border: 1px inset rgba(225, 225, 225, 0.2);
     backdrop-filter: blur(10px);
     padding: 4em 2em;
-    border-radius: 1em 4em;
+    border-radius: .8em 4em;
     box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.2);
- 
+    transform-style: preserve-3d;
+    transform: perspective(1000px); 
 }
 .leaves{
     width: 100vw;
@@ -42,9 +38,6 @@ body{
 
 .game-title{
     text-align: center;
-   
-
-
 }
 
 .game-title-two{

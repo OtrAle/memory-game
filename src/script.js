@@ -5,14 +5,11 @@ var imagesBg = new Array()
 			imagesBg[i].src = preload.arguments[i]
 		}
 }
-
-
 preload(
 	"card-back.png",
     "bg.svg",
     "leaves-01.svg"
 );
-
 
 let group1 = new Array();
 let group2 = new Array();
@@ -32,6 +29,41 @@ let minutesArray = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2];
 let defaultTime = 0;
 let level = 1;
 let numCards;
+
+//Tilt effect
+let startCard = document.querySelector(".start-card");
+startCard.addEventListener("mousemove", tiltEffect);
+startCard.addEventListener("mouseleave", stopTilt);
+startCard.addEventListener("mouseenter", enterTilt);
+
+function enterTilt(event) {
+    setTransition();
+}
+
+function tiltEffect(event) {
+    const cardWidth = startCard.offsetWidth;
+    const cardHeight = startCard.offsetHeight;
+    const centerX = startCard.offsetLeft + cardWidth/2;
+    const centerY = startCard.offsetTop + cardHeight/2;
+    const mouseX = event.clientX - centerX;
+    const mouseY = event.clientY - centerY;
+    const rotateX = 15 * mouseY/(cardHeight/2);
+    const rotateY = -15 * mouseX/(cardWidth/2);
+    startCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}
+
+function stopTilt(event){
+    startCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+    setTransition();
+}
+
+function setTransition() {
+    clearTimeout(startCard.transitionTimeout);
+    startCard.style.transition = "transform 300ms cubic-bezier(.03, .98, .52, .99)";
+    startCard.transitionTimeout = setTimeout(() => {
+        startCard.style.transition = "";
+    }, 3000); 
+}
 
 //Create cards
 function createCards() {
