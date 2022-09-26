@@ -48,8 +48,8 @@ function tiltEffect(event) {
     const centerY = startCard.offsetTop + cardHeight/2;
     const mouseX = event.clientX - centerX;
     const mouseY = event.clientY - centerY;
-    const rotateX = 10 * mouseY/(cardHeight/2);
-    const rotateY = -10 * mouseX/(cardWidth/2);
+    const rotateX = 15 * mouseY/(cardHeight/2);
+    const rotateY = -15 * mouseX/(cardWidth/2);
     startCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 }
 
