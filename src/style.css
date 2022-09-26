@@ -16,10 +16,6 @@ body{
 }
 
 .start-card{
-    /* background-image: url("../leaves-01.svg");
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size:cover; */
     z-index: 1;
     background-color:rgba(255, 255, 255, 0.1);
     border: 1px inset rgba(225, 225, 225, 0.2);
@@ -30,6 +26,7 @@ body{
     transform-style: preserve-3d;
     transform: perspective(1000px); 
 }
+
 .leaves{
     width: 100vw;
     height: 100vh;
@@ -48,12 +45,21 @@ body{
     font-size: 3em;
     color: #f70b66;
     font-weight: 700;
-    text-shadow: 3px 3px 2px #27000f;
     line-height: 1em;
+
+    text-shadow: 1px 1px 1px #7f0232,
+        1px 2px 1px #7f0232,
+        1px 3px 1px #7f0232,
+        1px 25px 35px rgba(16,16,16,0.2),
+        1px 30px 60px rgba(16,16,16,0.8);
 }
+
 .game-title-one{
+    font-family: 'Pacifico', cursive;
     color: #E6AF1C;
-    text-shadow: 3px 3px 2px #251b00; 
+    text-shadow: 1px 1px 1px #7b4800,
+    1px 30px 60px rgba(16,16,16,0.8);
+    
 }
 
 
@@ -215,6 +221,7 @@ button:hover{
 }
 
 .card {
+
     margin: 0.5rem;
     width: 8rem;
     height: 12rem;
@@ -227,6 +234,7 @@ button:hover{
 
 .front,
 .back{
+
     display: flex;
     justify-content: center;
     align-items: center;
