@@ -1,8 +1,6 @@
-*{
-    font-family: 'Antonio', sans-serif;
-}
 
 body{
+    font-family: 'Antonio', sans-serif;
     min-height: 100vh;
     background-image: url("../bg.svg");
     background-attachment: fixed;
@@ -16,6 +14,7 @@ body{
 }
 
 .start-card{
+    font-family: 'Antonio', sans-serif;
     z-index: 1;
     background-color:rgba(255, 255, 255, 0.1);
     border: 1px inset rgba(225, 225, 225, 0.2);
@@ -175,7 +174,7 @@ body{
     margin: 1rem 0rem 1rem 0rem;
     border-radius: 0 50px 50px 0;
     text-align: left;
-    padding: .4rem 1.5rem .4rem 1rem;
+    padding: .4rem 1.8rem .4rem 1rem;
     background-color:rgba(134, 19, 67, 0.5);
     box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.2);
 }
@@ -188,6 +187,7 @@ main{
 }
 
 button{
+    font-family: 'Antonio', sans-serif;
     z-index: 3;
     font-weight: 700;
     letter-spacing:.5em;
@@ -221,7 +221,7 @@ button:hover{
 }
 
 .card {
-
+    cursor: pointer;
     margin: 0.5rem;
     width: 8rem;
     height: 12rem;
@@ -342,7 +342,6 @@ img{
 
 .numbers{
     display: flex;
-    /* justify-content: center; */
     align-items: center;
 }
 
@@ -361,3 +360,70 @@ img{
 .fa-solid:hover {
     color: #e3c264;
 }
+
+.end-game{
+    color: white;
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    width:100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background-color:rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadein 1s ease-in;
+}
+.story{
+    font-family: 'Noto Sans', sans-serif;
+    font-size: .7em;
+    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+h1{
+    margin: 0;
+    display: block;
+    font-family: 'Antonio', sans-serif;
+    font-size: 2em;
+    font-weight: 400;
+    color: #f70b66;
+}
+
+h2 {
+    margin: 0;
+}
+
+.end-go-start{
+    z-index: 2;
+    bottom: 4em;
+    position: fixed;
+    margin: 0 auto;
+}
+
+h2 span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(4px);
+  animation: fade-in 1s 0.1s forwards ease-in;
+}
+
+h1 span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(4px);
+    animation: fade-in 2s 0s forwards ease-in;
+}
+
+@keyframes fade-in {
+    from{   
+        opacity: 0;
+        filter: blur(4px);
+        transform: scale(1.1);
+    } to {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1); 
+  }
+} 

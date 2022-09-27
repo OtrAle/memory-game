@@ -25,6 +25,9 @@ let nextLevelScreen = document.querySelector(".next-level-screen");
 let timeUp = document.querySelector(".time-is-up");
 let movesOver = document.querySelector(".moves-out");
 let table = document.querySelector("#table");
+let endGame = document.querySelector(".end-game");
+
+
 let secondsArray = [15, 25, 25, 30, 30, 50, 50, 10, 10, 20, 20, 30, 40, 50, 0];
 let minutesArray = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2];
 let defaultTime = 0;
@@ -140,6 +143,7 @@ function dealCards() {
     header.style.display = "block";
     nextLevelScreen.style.display = "none";
     startScreen.style.display = "none";
+    endGame.style.display = "none";
 
     document.querySelector("#level").innerHTML = level;
     clearInterval(timer);
@@ -191,7 +195,7 @@ function dealCards() {
                 document.querySelector("#sound-level-up").play();
                endLevel();
             } else if (leftCards.length===0 && numCards===15) {
-                alert("end");
+                gameOver();
             }
         }, 2000);
     }
@@ -322,6 +326,8 @@ function goToStartScreen() {
     header.style.display = "none";
     nextLevelScreen.style.display = "none";
     startScreen.style.display = "flex";
+    endGame.style.display = "none";
+
 }
 
 //end game
@@ -340,6 +346,8 @@ function timeOver() {
     table.style.display = "none";
     header.style.display = "none";
     movesOver.style.display = "none";
+    endGame.style.display = "none";
+
 }
 
 //Moves out
@@ -350,6 +358,8 @@ function movesOut() {
     timeUp.style.display = "none";
     table.style.display = "none";
     header.style.display = "none";
+    endGame.style.display = "none";
+
 }
 
 //Start Game
@@ -364,4 +374,39 @@ document.querySelectorAll(".go-start").forEach(element => {
     element.addEventListener("click", goToStartScreen)
 });
 
+function gameOver(){
+    document.querySelector("#sound-level-up").play();
+    setTimeout(function () {
+        movesOver.style.display = "none";
+        timeUp.style.display = "none";
+        table.style.display = "none";
+        header.style.display = "none";
+        endGame.style.display = "none";
+        endGame.style.display = "flex";
+        document.querySelector("#sound-win-game").cloneNode().play();
+        textAnimation();  
+    },1000);
+}
 
+//end screen animation
+
+function textAnimation(){
+    let story = document.querySelector(".story");
+    let words = story.children;
+    let numWords = 85;
+    let delayAnimation = 0;
+
+    for (let i = 0; i < numWords; i++) {   
+        delayAnimation = delayAnimation + 180;
+        words[i].style.animationDelay = `${delayAnimation}ms`;    
+    }
+
+    let numLetters = 20;
+    let alebrijes = document.querySelector("h1");
+    let alebrijesLetters = alebrijes.children;
+
+    for (let i = 0; i < numLetters; i++) {   
+        delayAnimation = delayAnimation + 180;
+        alebrijesLetters[i].style.animationDelay = `${delayAnimation}ms`;    
+    }
+}
