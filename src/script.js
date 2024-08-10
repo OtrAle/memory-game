@@ -294,7 +294,7 @@ function startTimer(){
         document.querySelector("#seconds").innerHTML= textSeconds;
 
         setTimeout(function() {
-            if (totalTime === 0 && document.querySelectorAll(".card:not(.success)").length !== 0) {
+            if (totalTime === -1 && document.querySelectorAll(".card:not(.success)").length !== 0) {
                 setTimeout(function() {
                     document.querySelector("#sound-level-fail").play();
                     timeOver();
